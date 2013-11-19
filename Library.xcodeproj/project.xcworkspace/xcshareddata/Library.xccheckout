@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B325A681-C82A-48CE-883D-3852CED47CF8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Library</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>058C26F1-6643-4ACE-BA5D-D8729433E396</key>
+		<string>https://github.com/alisonrclarke/grids-core-data-library.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Library/Library.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>058C26F1-6643-4ACE-BA5D-D8729433E396</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/alisonrclarke/grids-core-data-library.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>058C26F1-6643-4ACE-BA5D-D8729433E396</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>058C26F1-6643-4ACE-BA5D-D8729433E396</string>
+			<key>IDESourceControlWCCName</key>
+			<string>grids-core-data-library</string>
+		</dict>
+	</array>
+</dict>
+</plist>
