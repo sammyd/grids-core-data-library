@@ -150,43 +150,7 @@
 
 #pragma mark - Private methods
 
-- (void) create {
-    // Grab the context
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
-    // Create a Publisher entity and set its name
-    Publisher *publisher = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher" inManagedObjectContext:context];
-    publisher.name = @"Harper Collins";
-    
-    // Create an Author entity
-    Author *author = [NSEntityDescription insertNewObjectForEntityForName:@"Author" inManagedObjectContext:context];
-    
-    // Set the artist attributes
-    author.forenames = @"Charles";
-    author.surname = @"Dickens";
-    
-    // Create a book entity
-    Book *book = [NSEntityDescription insertNewObjectForEntityForName:@"Book" inManagedObjectContext:context];
-    
-    // Set album attributes
-    book.title = @"Bleak House";
-    book.year = @1853;
-    
-    // Set relationships
-    [book setPublisher:publisher];
-    [publisher addBooksObject:book];
-    [book setAuthor:author];
-    [author addBooksObject:book];
-    
-    // Save everything
-    NSError *error = nil;
-    if ([context save:&error]) {
-        NSLog(@"The save was successful!");
-    } else {
-        NSLog(@"The save wasn't successful: %@", [error userInfo]);
-    }
-}
-
+// Delete - call this method if you want to revert to the original data
 - (void) delete {
     // Grab the context
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -195,10 +159,10 @@
     [allBooks setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     
     NSError * error = nil;
-    NSArray * cars = [context executeFetchRequest:allBooks error:&error];
+    NSArray * books = [context executeFetchRequest:allBooks error:&error];
     //error handling goes here
-    for (NSManagedObject * car in cars) {
-        [context deleteObject:car];
+    for (NSManagedObject * book in books) {
+        [context deleteObject:book];
     }
     NSError *saveError = nil;
     [context save:&saveError];

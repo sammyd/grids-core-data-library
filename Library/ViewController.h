@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <ShinobiGrids/ShinobiDataGrid.h>
 
-@interface ViewController : UIViewController<SDataGridDataSourceHelperDelegate>
+@interface ViewController : UIViewController<SDataGridDelegate>
 
 @property (weak, nonatomic) IBOutlet ShinobiDataGrid *shinobiDataGrid;
 

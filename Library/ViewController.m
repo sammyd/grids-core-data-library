@@ -19,9 +19,9 @@
 
 @implementation ViewController
 {
-    //ShinobiDataGrid *_shinobiDataGrid;
     SDataGridDataSourceHelper* _datasourceHelper;
     NSManagedObjectContext *_context;
+    NSArray *_data;
 }
 
 - (void) viewDidLoad {
@@ -37,6 +37,8 @@
 
     // Set up the grid
     _shinobiDataGrid.defaultRowHeight = @70;
+    _shinobiDataGrid.singleTapEventMask = SDataGridEventNone;
+    _shinobiDataGrid.doubleTapEventMask = SDataGridEventEdit;
     
     // Find the properties of a Book and add them as columns
     NSEntityDescription *bookEntity = [NSEntityDescription entityForName:@"Book" inManagedObjectContext:_context];
@@ -45,6 +47,7 @@
     for (NSString* propertyName in bookProperties) {
         NSString* columnTitle = [[propertyName stringByReplacingOccurrencesOfString:@"_"withString:@" "] capitalizedString];
         SDataGridColumn* column = [[SDataGridColumn alloc] initWithTitle:columnTitle forProperty:propertyName cellType:[SDataGridMultiLineTextCell class] headerCellType:[SDataGridHeaderMultiLineCell class]];
+        column.editable = YES;
         
         // Set widths
         if ([propertyName isEqualToString:@"year"]) {
@@ -64,11 +67,14 @@
                                               inManagedObjectContext:_context];
     [fetchRequest setEntity:entity];
     NSError *error = nil;
-    NSArray *fetchedObjects = [_context executeFetchRequest:fetchRequest error:&error];
+    _data = [_context executeFetchRequest:fetchRequest error:&error];
 
     // Create a datasource helper and hand it the books
     _datasourceHelper = [[SDataGridDataSourceHelper alloc] initWithDataGrid:_shinobiDataGrid];
-    _datasourceHelper.data = fetchedObjects;
+    _datasourceHelper.data = _data;
+    
+    _shinobiDataGrid.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -178,13 +184,68 @@
         
         // Save everything
         error = nil;
-        if ([_context save:&error]) {
-            NSLog(@"The save was successful!");
-        } else {
+        if (![_context save:&error]) {
             NSLog(@"The save wasn't successful: %@", [error userInfo]);
         }
     }
 
+}
+
+#pragma mark - SDataGridDelegate methods
+
+- (void)shinobiDataGrid:(ShinobiDataGrid *)grid didFinishEditingCellAtCoordinate:(SDataGridCoord *)coordinate
+{
+    // Find the cell that was edited
+    SDataGridMultiLineTextCell* cell = (SDataGridMultiLineTextCell*)[_shinobiDataGrid visibleCellAtCoordinate:coordinate];
+    
+    // Find the text entered by the user
+    UITextView * textView = cell.editingTextView;
+    NSString* updatedText = textView.text;
+    
+    // Locate the model object for this row
+    Book* book = _data[coordinate.row.rowIndex];
+    
+    // Determine which column this cell belongs to, and handle the edit appropriately
+    NSString *cellTitle = cell.coordinate.column.title;
+    
+    if ([cellTitle isEqualToString:@"Title"]) {
+        // Just update the text of the book's title
+        book.title = updatedText;
+        
+    } else if ([cellTitle isEqualToString:@"Year"]) {
+        // Parse the input text to make sure it's numeric
+        NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber* newYear = [formatter numberFromString:updatedText];
+        
+        if (newYear != nil)
+        {
+            // If the input was valid, update the model
+            book.year = newYear;
+        }
+        
+    } else if ([cellTitle isEqualToString:@"Publisher"]) {
+        // Update the name of the book's Publisher object
+        book.publisher.name = updatedText;
+        
+    } else if ([cellTitle isEqualToString:@"Author"]) {
+        // Work out where to split the string into forename and surname
+        // We'll assume simplistically that everything up to the last space is surname
+        NSUInteger splitLocation = [updatedText rangeOfString:@" " options:NSBackwardsSearch].location;
+        
+        // Update the book's author object with the relevant substrings
+        book.author.forenames = [updatedText substringToIndex:splitLocation];
+        book.author.surname = [updatedText substringFromIndex:(splitLocation+1)];
+    }
+    
+    // Save everything
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        NSLog(@"The save wasn't successful: %@", [error userInfo]);
+    }
+    
+    // Reload the data to reflect any changes in author or publisher
+    [_shinobiDataGrid reload];
 }
 
 #pragma mark - UIViewController methods
