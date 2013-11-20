@@ -10,6 +10,7 @@
 		683E7C56183A45080038CFF1 /* ShinobiGrids.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683E7C55183A45080038CFF1 /* ShinobiGrids.framework */; };
 		683E7C59183A77BC0038CFF1 /* Author+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 683E7C58183A77BC0038CFF1 /* Author+Description.m */; };
 		683E7C5C183A78080038CFF1 /* Publisher+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 683E7C5B183A78080038CFF1 /* Publisher+Description.m */; };
+		683E7C64183CCC3B0038CFF1 /* LibraryDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 683E7C63183CCC3B0038CFF1 /* LibraryDataHelper.m */; };
 		6890E48F183A1947009C81F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6890E48E183A1947009C81F2 /* Foundation.framework */; };
 		6890E491183A1947009C81F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6890E490183A1947009C81F2 /* CoreGraphics.framework */; };
 		6890E493183A1947009C81F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6890E492183A1947009C81F2 /* UIKit.framework */; };
@@ -45,6 +46,8 @@
 		683E7C58183A77BC0038CFF1 /* Author+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Author+Description.m"; sourceTree = "<group>"; };
 		683E7C5A183A78080038CFF1 /* Publisher+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Publisher+Description.h"; sourceTree = "<group>"; };
 		683E7C5B183A78080038CFF1 /* Publisher+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Publisher+Description.m"; sourceTree = "<group>"; };
+		683E7C62183CCC3B0038CFF1 /* LibraryDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryDataHelper.h; sourceTree = "<group>"; };
+		683E7C63183CCC3B0038CFF1 /* LibraryDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryDataHelper.m; sourceTree = "<group>"; };
 		6890E48B183A1947009C81F2 /* Library.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Library.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6890E48E183A1947009C81F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6890E490183A1947009C81F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -149,6 +152,8 @@
 				683E7C58183A77BC0038CFF1 /* Author+Description.m */,
 				683E7C5A183A78080038CFF1 /* Publisher+Description.h */,
 				683E7C5B183A78080038CFF1 /* Publisher+Description.m */,
+				683E7C62183CCC3B0038CFF1 /* LibraryDataHelper.h */,
+				683E7C63183CCC3B0038CFF1 /* LibraryDataHelper.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				6890E49B183A1947009C81F2 /* main.m in Sources */,
 				6890E4D3183A1B1B009C81F2 /* Book.m in Sources */,
 				6890E4C8183A19AF009C81F2 /* Model.xcdatamodeld in Sources */,
+				683E7C64183CCC3B0038CFF1 /* LibraryDataHelper.m in Sources */,
 				683E7C5C183A78080038CFF1 /* Publisher+Description.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
