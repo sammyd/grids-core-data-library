@@ -10,6 +10,7 @@
 #import "Author.h"
 #import "Publisher.h"
 #import "Book.h"
+#import "LibraryManagedObject.h"
 
 @implementation LibraryDataHelper
 {
@@ -22,7 +23,7 @@
         _context = context;
         
         // Set up the library data
-        [self setupData];
+        [self setupData:false];
     }
     return self;
 }
@@ -34,12 +35,37 @@
     return [properties allKeys];
 }
 
--(NSArray*)fetchAllEntitiesWithName:(NSString*)entityName
+-(NSArray*)getAttributeNamesForEntityName:(NSString *)entityName
 {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:_context];
+    NSDictionary* properties = [entity attributesByName];
+    return [properties allKeys];
+}
+
+-(NSArray*)getRelationshipEntityNamesForEntityName:(NSString *)entityName
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:_context];
+    NSDictionary* properties = [entity relationshipsByName];
+    NSMutableArray* names = [[NSMutableArray alloc] init];
+    for (NSString* key in properties) {
+        NSRelationshipDescription *description = properties[key];
+        [names addObject:description.destinationEntity.name];
+    }
+    return names;
+}
+
+
+-(NSArray*)fetchAllEntitiesOfType:(Class <LibraryManagedObject>)type
+{
+    NSString* entityName = NSStringFromClass(type);
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:_context];
     [fetchRequest setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:[type sortField] ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
     NSError *error = nil;
     NSArray* data = [_context executeFetchRequest:fetchRequest error:&error];
     if (error != nil) {
@@ -55,17 +81,25 @@
     }
 }
 
-// Sets up the data, if there aren't any books already in the library
-- (void) setupData
+// Sets up the data, if there aren't any books already in the library, or if forceReset is true
+- (void) setupData:(bool)forceReset
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Book"
-                                              inManagedObjectContext:_context];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setIncludesSubentities:NO];
-    NSError *error = nil;
-    NSUInteger count = [_context countForFetchRequest:fetchRequest error:&error];
-    if(count == 0) {
+    NSUInteger count;
+    NSError *error;
+    
+    if (forceReset) {
+        [self deleteAllData];
+    } else {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Book"
+                                                  inManagedObjectContext:_context];
+        [fetchRequest setEntity:entity];
+        [fetchRequest setIncludesSubentities:NO];
+        NSError *error = nil;
+        count = [_context countForFetchRequest:fetchRequest error:&error];
+    }
+    
+    if(forceReset || count == 0) {
         // Create some Publisher entities
         Publisher *publisher1 = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher"
                                                               inManagedObjectContext:_context];
@@ -160,7 +194,40 @@
             NSLog(@"The save wasn't successful: %@", [error userInfo]);
         }
     }
+}
+
+- (void) deleteAllData {
+    NSFetchRequest * allItems = [[NSFetchRequest alloc] init];
+    [allItems setEntity:[NSEntityDescription entityForName:@"Book" inManagedObjectContext:_context]];
+    [allItems setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     
+    NSError * error = nil;
+    NSArray * items = [_context executeFetchRequest:allItems error:&error];
+    for (NSManagedObject * book in items) {
+        [_context deleteObject:book];
+    }
+    
+    allItems = [[NSFetchRequest alloc] init];
+    [allItems setEntity:[NSEntityDescription entityForName:@"Author" inManagedObjectContext:_context]];
+    [allItems setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    
+    items = [_context executeFetchRequest:allItems error:&error];
+    for (NSManagedObject * author in items) {
+        [_context deleteObject:author];
+    }
+    
+    allItems = [[NSFetchRequest alloc] init];
+    [allItems setEntity:[NSEntityDescription entityForName:@"Publisher" inManagedObjectContext:_context]];
+    [allItems setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    
+    items = [_context executeFetchRequest:allItems error:&error];
+    //error handling goes here
+    for (NSManagedObject * publisher in items) {
+        [_context deleteObject:publisher];
+    }
+    
+    NSError *saveError = nil;
+    [_context save:&saveError];
 }
 
 @end

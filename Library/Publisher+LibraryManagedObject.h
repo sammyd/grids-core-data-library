@@ -7,9 +7,8 @@
 //
 
 #import "Publisher.h"
+#import "LibraryManagedObject.h"
 
-@interface Publisher (Description)
-
-- (NSString *) description;
+@interface Publisher (LibraryManagedObject) <LibraryManagedObject>
 
 @end

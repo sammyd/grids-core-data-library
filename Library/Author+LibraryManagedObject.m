@@ -6,12 +6,16 @@
 //  Copyright (c) 2013 Alison Clarke. All rights reserved.
 //
 
-#import "Author+Description.h"
+#import "Author+LibraryManagedObject.h"
 
-@implementation Author (Description)
+@implementation Author (LibraryManagedObject)
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@ %@", self.forenames, self.surname];
+}
+
++ (NSString *)sortField {
+    return @"surname";
 }
 
 @end

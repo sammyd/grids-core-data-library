@@ -20,7 +20,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self delete];
     // Override point for customization after application launch.
     return YES;
 }
@@ -146,26 +145,6 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-#pragma mark - Private methods
-
-// Delete - call this method if you want to revert to the original data
-- (void) delete {
-    // Grab the context
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSFetchRequest * allBooks = [[NSFetchRequest alloc] init];
-    [allBooks setEntity:[NSEntityDescription entityForName:@"Book" inManagedObjectContext:context]];
-    [allBooks setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-    
-    NSError * error = nil;
-    NSArray * books = [context executeFetchRequest:allBooks error:&error];
-    //error handling goes here
-    for (NSManagedObject * book in books) {
-        [context deleteObject:book];
-    }
-    NSError *saveError = nil;
-    [context save:&saveError];
 }
 
 @end

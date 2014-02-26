@@ -6,12 +6,16 @@
 //  Copyright (c) 2013 Alison Clarke. All rights reserved.
 //
 
-#import "Publisher+Description.h"
+#import "Publisher+LibraryManagedObject.h"
 
-@implementation Publisher (Description)
+@implementation Publisher (LibraryManagedObject)
 
 - (NSString *)description {
     return self.name;
+}
+
++ (NSString *) sortField {
+    return @"name";
 }
 
 @end

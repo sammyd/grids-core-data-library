@@ -7,9 +7,8 @@
 //
 
 #import "Author.h"
+#import "LibraryManagedObject.h"
 
-@interface Author (Description)
-
-- (NSString *) description;
+@interface Author (LibraryManagedObject) <LibraryManagedObject>
 
 @end
