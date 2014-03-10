@@ -10,7 +10,6 @@
 
 @protocol LibraryManagedObject <NSObject>
 
-- (NSString *) description;
 + (NSString *) sortField;
 
 @end

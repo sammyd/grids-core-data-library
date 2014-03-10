@@ -46,41 +46,40 @@
     _datasourceHelper.data = _data;
     _datasourceHelper.delegate = self;
     
-    // Find the attributes of a Book and add them as text columns
-    NSArray* bookAttributes = [_libraryDataHelper getAttributeNamesForEntityName:@"Book"];
-    
+    // Create a cell style with the font size we want
     SDataGridCellStyle *cellStyle = [[SDataGridCellStyle alloc] init];
     cellStyle.font = [UIFont systemFontOfSize:13];
     
-    for (NSString* attributeName in bookAttributes) {
-        NSString* columnTitle = [[attributeName stringByReplacingOccurrencesOfString:@"_"withString:@" "] capitalizedString];
-        SDataGridColumn* column = [[SDataGridColumn alloc] initWithTitle:columnTitle forProperty:attributeName cellType:[SDataGridMultiLineTextCell class] headerCellType:[SDataGridHeaderMultiLineCell class]];
-        column.editable = YES;
-        column.cellStyle = cellStyle;
-        
-        if ([attributeName isEqualToString:@"year"]) {
-            column.width = @105;
-        } else {
-            column.width = @190;
-        }
-        
-        [_shinobiDataGrid addColumn:column];
-    }
+    // Add Title column
+    SDataGridColumn* titleColumn = [[SDataGridColumn alloc] initWithTitle:@"Title" forProperty:@"Title" cellType:[SDataGridMultiLineTextCell class] headerCellType:[SDataGridHeaderMultiLineCell class]];
+    titleColumn.editable = YES;
+    titleColumn.cellStyle = cellStyle;
+    titleColumn.width = @190;
+    [_shinobiDataGrid addColumn:titleColumn];
     
-    // Find the relationships of a Book and add them as picker columns
-    NSArray* bookRelationships = [_libraryDataHelper getRelationshipEntityNamesForEntityName:@"Book"];
-
-    for (NSString* relationshipName in bookRelationships) {
-        NSString* columnTitle = [[relationshipName stringByReplacingOccurrencesOfString:@"_"withString:@" "] capitalizedString];
-        SDataGridColumn* column = [[SDataGridColumn alloc] initWithTitle:columnTitle forProperty:relationshipName cellType:[PickerCell class] headerCellType:[SDataGridHeaderMultiLineCell class]];
-        column.editable = YES;
-        column.width = @200;
-        
-        [_shinobiDataGrid addColumn:column];
-    }
-
+    // Add Author column
+    SDataGridColumn* authorColumn = [[SDataGridColumn alloc] initWithTitle:@"Author" forProperty:@"Author" cellType:[PickerCell class] headerCellType:[SDataGridHeaderMultiLineCell class]];
+    authorColumn.editable = YES;
+    authorColumn.cellStyle = cellStyle;
+    authorColumn.width = @200;
+    [_shinobiDataGrid addColumn:authorColumn];
+    
+    // Add Publisher column
+    SDataGridColumn* publisherColumn = [[SDataGridColumn alloc] initWithTitle:@"Publisher" forProperty:@"Publisher" cellType:[PickerCell class] headerCellType:[SDataGridHeaderMultiLineCell class]];
+    publisherColumn.editable = YES;
+    publisherColumn.cellStyle = cellStyle;
+    publisherColumn.width = @200;
+    [_shinobiDataGrid addColumn:publisherColumn];
+    
+    // Add Year column
+    SDataGridColumn* yearColumn = [[SDataGridColumn alloc] initWithTitle:@"Year" forProperty:@"Year" cellType:[SDataGridMultiLineTextCell class] headerCellType:[SDataGridHeaderMultiLineCell class]];
+    yearColumn.editable = YES;
+    yearColumn.cellStyle = cellStyle;
+    yearColumn.width = @105;
+    [_shinobiDataGrid addColumn:yearColumn];
+    
+    // Reload the data grid to display the data
     [_shinobiDataGrid reload];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,13 +96,12 @@
     Book* book = _data[coordinate.row.rowIndex];
     
     // Get the cell that was edited
-    SDataGridCell* cell = (SDataGridCell*)[_shinobiDataGrid visibleCellAtCoordinate:coordinate];
+    SDataGridCell* cell = [_shinobiDataGrid visibleCellAtCoordinate:coordinate];
     
     // Determine which column this cell belongs to, and handle the edit appropriately
     NSString *cellTitle = cell.coordinate.column.title;
     
-    if ([cellTitle isEqualToString:@"Title"] || [cellTitle isEqualToString:@"Year"])
-    {
+    if ([cellTitle isEqualToString:@"Title"] || [cellTitle isEqualToString:@"Year"]) {
         // Find the cell that was edited
         SDataGridMultiLineTextCell* textCell = (SDataGridMultiLineTextCell*) cell;
         
@@ -120,8 +118,7 @@
             [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
             NSNumber* newYear = [formatter numberFromString:updatedText];
             
-            if (newYear)
-            {
+            if (newYear) {
                 // If the input was valid, update the model
                 book.year = newYear;
             } else {
@@ -165,8 +162,7 @@
         pickerCell.values = [_libraryDataHelper fetchAllEntitiesOfType:NSClassFromString(propertyKey)];
         for (int i=0; i<pickerCell.values.count; i++)
         {
-            NSString* selectedDescription = [pickerCell.values[i] description];
-            if ([selectedDescription isEqualToString:[value description]])
+            if ([[pickerCell.values[i] objectID] isEqual:[value objectID]])
             {
                 pickerCell.selectedIndex = i;
                 break;

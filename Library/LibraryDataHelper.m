@@ -23,38 +23,13 @@
         _context = context;
         
         // Set up the library data
+        // If you want to reset the data, change the parameter to true
         [self setupData:false];
     }
     return self;
 }
 
--(NSArray*)getPropertyNamesForEntityName:(NSString *)entityName
-{
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:_context];
-    NSDictionary* properties = [entity propertiesByName];
-    return [properties allKeys];
-}
-
--(NSArray*)getAttributeNamesForEntityName:(NSString *)entityName
-{
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:_context];
-    NSDictionary* properties = [entity attributesByName];
-    return [properties allKeys];
-}
-
--(NSArray*)getRelationshipEntityNamesForEntityName:(NSString *)entityName
-{
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:_context];
-    NSDictionary* properties = [entity relationshipsByName];
-    NSMutableArray* names = [[NSMutableArray alloc] init];
-    for (NSString* key in properties) {
-        NSRelationshipDescription *description = properties[key];
-        [names addObject:description.destinationEntity.name];
-    }
-    return names;
-}
-
-
+// Retrieves all entities of the given type
 -(NSArray*)fetchAllEntitiesOfType:(Class <LibraryManagedObject>)type
 {
     NSString* entityName = NSStringFromClass(type);
@@ -117,6 +92,15 @@
                                                               inManagedObjectContext:_context];
         publisher4.name = @"American Publishing Company";
         
+        Publisher *publisher5 = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher"
+                                                              inManagedObjectContext:_context];
+        publisher5.name = @"James R Osgood & Co";
+        
+        Publisher *publisher6 = [NSEntityDescription insertNewObjectForEntityForName:@"Publisher"
+                                                              inManagedObjectContext:_context];
+        publisher6.name = @"Charles L Webster & Co";
+        
+
         // Create some Author entities
         Author *author1 = [NSEntityDescription insertNewObjectForEntityForName:@"Author"
                                                         inManagedObjectContext:_context];
@@ -187,6 +171,34 @@
         [publisher1 addBooksObject:book6];
         [book6 setAuthor:author3];
         [author3 addBooksObject:book6];
+        
+        Book *book7 = [NSEntityDescription insertNewObjectForEntityForName:@"Book"
+                                                    inManagedObjectContext:_context];
+        book7.title = @"The Prince and the Pauper";
+        book7.year = @1881;
+        [book7 setPublisher:publisher5];
+        [publisher5 addBooksObject:book7];
+        [book7 setAuthor:author2];
+        [author2 addBooksObject:book7];
+        
+        Book *book8 = [NSEntityDescription insertNewObjectForEntityForName:@"Book"
+                                                    inManagedObjectContext:_context];
+        book8.title = @"Adventures of Huckleberry Finn";
+        book8.year = @1885;
+        [book8 setPublisher:publisher6];
+        [publisher6 addBooksObject:book8];
+        [book8 setAuthor:author2];
+        [author2 addBooksObject:book8];
+        
+        
+        Book *book9 = [NSEntityDescription insertNewObjectForEntityForName:@"Book"
+                                                    inManagedObjectContext:_context];
+        book9.title = @"A Connecticut Yankee in King Arthur's Court";
+        book9.year = @1889;
+        [book9 setPublisher:publisher6];
+        [publisher6 addBooksObject:book9];
+        [book9 setAuthor:author2];
+        [author2 addBooksObject:book8];
         
         // Save everything
         error = nil;

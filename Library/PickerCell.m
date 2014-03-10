@@ -94,7 +94,7 @@
     
     // Finally create and display the popover
     _popover = [[UIPopoverController alloc] initWithContentViewController:_pickerViewController];
-    [_popover presentPopoverFromRect:self.bounds inView:self permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [_popover presentPopoverFromRect:self.bounds inView:self permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
 }
 
 #pragma mark PickerDelegate methods

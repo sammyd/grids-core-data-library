@@ -34,7 +34,6 @@
         _pickerView = [[UIPickerView alloc] init];
         _pickerView.delegate = self;
         _pickerView.dataSource = self;
-        _pickerView.frame = CGRectMake(0, 0, 200, _pickerView.frame.size.height);
     }
     
     // Select the row matching _selectedIndex

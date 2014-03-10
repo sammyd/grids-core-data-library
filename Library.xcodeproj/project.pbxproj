@@ -146,11 +146,8 @@
 		6890E494183A1947009C81F2 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				68DE374618C4A036008B654A /* PickerCell */,
 				689A501A18BDF0D2003F983F /* Model */,
-				688B61731860AA6100B5551A /* PickerCell.h */,
-				688B61741860AA6100B5551A /* PickerCell.m */,
-				688B61751860AA6100B5551A /* PickerViewController.h */,
-				688B61761860AA6100B5551A /* PickerViewController.m */,
 				6890E49D183A1947009C81F2 /* AppDelegate.h */,
 				6890E49E183A1947009C81F2 /* AppDelegate.m */,
 				6890E4A0183A1947009C81F2 /* Main.storyboard */,
@@ -194,6 +191,17 @@
 				689A501918BDE285003F983F /* LibraryManagedObject.h */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		68DE374618C4A036008B654A /* PickerCell */ = {
+			isa = PBXGroup;
+			children = (
+				688B61731860AA6100B5551A /* PickerCell.h */,
+				688B61741860AA6100B5551A /* PickerCell.m */,
+				688B61751860AA6100B5551A /* PickerViewController.h */,
+				688B61761860AA6100B5551A /* PickerViewController.m */,
+			);
+			name = PickerCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
