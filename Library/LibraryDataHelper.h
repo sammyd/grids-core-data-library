@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "LibraryManagedObject.h"
 
 @interface LibraryDataHelper : NSObject
 
 -(id)initWithContext:(NSManagedObjectContext*)context;
--(NSArray*)fetchAllEntitiesOfType:(Class)type;
+-(NSArray*)fetchAllEntitiesOfType:(Class <LibraryManagedObject>)type;
 -(void)saveChanges;
 
 @end

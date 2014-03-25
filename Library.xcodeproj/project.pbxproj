@@ -18,13 +18,12 @@
 		6890E499183A1947009C81F2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6890E497183A1947009C81F2 /* InfoPlist.strings */; };
 		6890E49B183A1947009C81F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6890E49A183A1947009C81F2 /* main.m */; };
 		6890E49F183A1947009C81F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6890E49E183A1947009C81F2 /* AppDelegate.m */; };
-		6890E4A2183A1947009C81F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6890E4A0183A1947009C81F2 /* Main.storyboard */; };
 		6890E4A5183A1947009C81F2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6890E4A4183A1947009C81F2 /* ViewController.m */; };
 		6890E4A7183A1947009C81F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6890E4A6183A1947009C81F2 /* Images.xcassets */; };
 		6890E4AE183A1947009C81F2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6890E4AD183A1947009C81F2 /* XCTest.framework */; };
 		6890E4AF183A1947009C81F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6890E48E183A1947009C81F2 /* Foundation.framework */; };
 		6890E4B0183A1947009C81F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6890E492183A1947009C81F2 /* UIKit.framework */; };
-		6890E4C8183A19AF009C81F2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6890E4C6183A19AF009C81F2 /* Model.xcdatamodeld */; };
+		6890E4C8183A19AF009C81F2 /* Library.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6890E4C6183A19AF009C81F2 /* Library.xcdatamodeld */; };
 		6890E4CA183A1AF8009C81F2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6890E4C9183A1AF8009C81F2 /* CoreData.framework */; };
 		6890E4CD183A1B1B009C81F2 /* Publisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6890E4CC183A1B1B009C81F2 /* Publisher.m */; };
 		6890E4D0183A1B1B009C81F2 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = 6890E4CF183A1B1B009C81F2 /* Author.m */; };
@@ -65,13 +64,12 @@
 		6890E49C183A1947009C81F2 /* Library-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Library-Prefix.pch"; sourceTree = "<group>"; };
 		6890E49D183A1947009C81F2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6890E49E183A1947009C81F2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6890E4A1183A1947009C81F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6890E4A3183A1947009C81F2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6890E4A4183A1947009C81F2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6890E4A6183A1947009C81F2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6890E4AC183A1947009C81F2 /* LibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6890E4AD183A1947009C81F2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		6890E4C7183A19AF009C81F2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		6890E4C7183A19AF009C81F2 /* Library.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Library.xcdatamodel; sourceTree = "<group>"; };
 		6890E4C9183A1AF8009C81F2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6890E4CB183A1B1B009C81F2 /* Publisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Publisher.h; sourceTree = "<group>"; };
 		6890E4CC183A1B1B009C81F2 /* Publisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Publisher.m; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				689A501A18BDF0D2003F983F /* Model */,
 				6890E49D183A1947009C81F2 /* AppDelegate.h */,
 				6890E49E183A1947009C81F2 /* AppDelegate.m */,
-				6890E4A0183A1947009C81F2 /* Main.storyboard */,
 				6890E4A3183A1947009C81F2 /* ViewController.h */,
 				6890E4A4183A1947009C81F2 /* ViewController.m */,
 				6890E4A6183A1947009C81F2 /* Images.xcassets */,
@@ -175,7 +172,7 @@
 		689A501A18BDF0D2003F983F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6890E4C6183A19AF009C81F2 /* Model.xcdatamodeld */,
+				6890E4C6183A19AF009C81F2 /* Library.xcdatamodeld */,
 				6890E4D1183A1B1B009C81F2 /* Book.h */,
 				6890E4D2183A1B1B009C81F2 /* Book.m */,
 				6890E4CE183A1B1B009C81F2 /* Author.h */,
@@ -282,7 +279,6 @@
 			files = (
 				6890E4A7183A1947009C81F2 /* Images.xcassets in Resources */,
 				6890E499183A1947009C81F2 /* InfoPlist.strings in Resources */,
-				6890E4A2183A1947009C81F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +303,7 @@
 				6890E49F183A1947009C81F2 /* AppDelegate.m in Sources */,
 				6890E49B183A1947009C81F2 /* main.m in Sources */,
 				6890E4D3183A1B1B009C81F2 /* Book.m in Sources */,
-				6890E4C8183A19AF009C81F2 /* Model.xcdatamodeld in Sources */,
+				6890E4C8183A19AF009C81F2 /* Library.xcdatamodeld in Sources */,
 				683E7C64183CCC3B0038CFF1 /* LibraryDataHelper.m in Sources */,
 				68979CEB18B2545300BF6F5A /* Book+LibraryManagedObject.m in Sources */,
 				683E7C5C183A78080038CFF1 /* Publisher+LibraryManagedObject.m in Sources */,
@@ -340,14 +336,6 @@
 				6890E498183A1947009C81F2 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6890E4A0183A1947009C81F2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6890E4A1183A1947009C81F2 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -538,13 +526,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6890E4C6183A19AF009C81F2 /* Model.xcdatamodeld */ = {
+		6890E4C6183A19AF009C81F2 /* Library.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6890E4C7183A19AF009C81F2 /* Model.xcdatamodel */,
+				6890E4C7183A19AF009C81F2 /* Library.xcdatamodel */,
 			);
-			currentVersion = 6890E4C7183A19AF009C81F2 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			currentVersion = 6890E4C7183A19AF009C81F2 /* Library.xcdatamodel */;
+			path = Library.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

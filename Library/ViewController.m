@@ -34,7 +34,9 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     _libraryDataHelper = [[LibraryDataHelper alloc] initWithContext:[appDelegate managedObjectContext]];
 
-    // Set up the grid
+    // Initialize and set up the grid
+    _shinobiDataGrid = [[ShinobiDataGrid alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:_shinobiDataGrid];
     _shinobiDataGrid.delegate = self;
     _shinobiDataGrid.singleTapEventMask = SDataGridEventNone;
     

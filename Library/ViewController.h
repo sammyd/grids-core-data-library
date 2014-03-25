@@ -11,6 +11,6 @@
 
 @interface ViewController : UIViewController<SDataGridDelegate, SDataGridDataSourceHelperDelegate>
 
-@property (weak, nonatomic) IBOutlet ShinobiDataGrid *shinobiDataGrid;
+@property (strong, nonatomic) ShinobiDataGrid *shinobiDataGrid;
 
 @end
