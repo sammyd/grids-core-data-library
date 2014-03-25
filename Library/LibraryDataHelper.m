@@ -60,7 +60,6 @@
 - (void) setupData:(bool)forceReset
 {
     NSUInteger count;
-    NSError *error;
     
     if (forceReset) {
         [self deleteAllData];
@@ -201,7 +200,7 @@
         [author2 addBooksObject:book8];
         
         // Save everything
-        error = nil;
+        NSError *error = nil;
         if (![_context save:&error]) {
             NSLog(@"The save wasn't successful: %@", [error userInfo]);
         }
@@ -209,37 +208,29 @@
 }
 
 - (void) deleteAllData {
-    NSFetchRequest * allItems = [[NSFetchRequest alloc] init];
-    [allItems setEntity:[NSEntityDescription entityForName:@"Book" inManagedObjectContext:_context]];
-    [allItems setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    NSArray *entityNames = @[@"Book", @"Author", @"Publisher"];
     
-    NSError * error = nil;
-    NSArray * items = [_context executeFetchRequest:allItems error:&error];
-    for (NSManagedObject * book in items) {
-        [_context deleteObject:book];
-    }
-    
-    allItems = [[NSFetchRequest alloc] init];
-    [allItems setEntity:[NSEntityDescription entityForName:@"Author" inManagedObjectContext:_context]];
-    [allItems setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-    
-    items = [_context executeFetchRequest:allItems error:&error];
-    for (NSManagedObject * author in items) {
-        [_context deleteObject:author];
-    }
-    
-    allItems = [[NSFetchRequest alloc] init];
-    [allItems setEntity:[NSEntityDescription entityForName:@"Publisher" inManagedObjectContext:_context]];
-    [allItems setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-    
-    items = [_context executeFetchRequest:allItems error:&error];
-    //error handling goes here
-    for (NSManagedObject * publisher in items) {
-        [_context deleteObject:publisher];
+    for(NSString *entityName in entityNames) {
+        NSFetchRequest * allItems = [[NSFetchRequest alloc] init];
+        [allItems setEntity:[NSEntityDescription entityForName:entityName
+                                        inManagedObjectContext:_context]];
+        [allItems setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+        
+        NSError * error = nil;
+        NSArray * items = [_context executeFetchRequest:allItems error:&error];
+        if(error) {
+            NSLog(@"%@", error);
+        }
+        for (NSManagedObject * book in items) {
+            [_context deleteObject:book];
+        }
     }
     
     NSError *saveError = nil;
     [_context save:&saveError];
+    if(saveError) {
+        NSLog(@"%@", saveError);
+    }
 }
 
 @end
